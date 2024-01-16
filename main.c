@@ -8,8 +8,11 @@ int main() {
 	fgets(input, sizeof(input), stdin);
 
 	Node* root = parser(input);
+
 	double result = evaluateTree(root);
 	printf("%lf\n", result);
+
+	freeTree(&root);
 
 	return 0;
 }
