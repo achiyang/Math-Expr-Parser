@@ -10,7 +10,7 @@ int main() {
 	Node* root = parser(input);
 
 	double result = evaluateTree(root);
-	printf("%lf\n", result);
+	printf("%g\n", result);
 
 	freeTree(&root);
 

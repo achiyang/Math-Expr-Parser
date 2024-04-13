@@ -158,28 +158,27 @@ double evaluateTree(Node* root) {
 	if (root->type == 'n') {
 		return (double)root->data.number;
 	}
-	switch (root->data.expression.op) {
-	case '+':
-		return evaluateTree(root->data.expression.left) + evaluateTree(root->data.expression.right);
-		break;
-	case '-':
-		return evaluateTree(root->data.expression.left) - evaluateTree(root->data.expression.right);
-		break;
-	case '*':
-		return evaluateTree(root->data.expression.left) * evaluateTree(root->data.expression.right);
-		break;
-	case '/':
-		if (root->data.expression.right != 0) {
-			return evaluateTree(root->data.expression.left) / evaluateTree(root->data.expression.right);
-		}
-		else {
-			fprintf(stderr, "Divide zero error\n");
+	else {
+		double left = evaluateTree(root->data.expression.left);
+		double right = evaluateTree(root->data.expression.right);
+
+		switch (root->data.expression.op) {
+		case '+':
+			return left + right;
+			break;
+		case '-':
+			return left - right;
+			break;
+		case '*':
+			return left * right;
+			break;
+		case '/':
+			return left / right;
+			break;
+		default:
+			fprintf(stderr, "Unexpected operator: '%c'\n", root->data.expression.op);
 			exit(EXIT_FAILURE);
 		}
-		break;
-	default:
-		fprintf(stderr, "Unexpected operator: '%c'\n", root->data.expression.op);
-		exit(EXIT_FAILURE);
 	}
 }
 
